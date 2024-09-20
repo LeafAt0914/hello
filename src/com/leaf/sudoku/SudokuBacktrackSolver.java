@@ -1,6 +1,7 @@
 package com.leaf.sudoku;
 
-public class SudokuSolver {
+public class SudokuBacktrackSolver {
+
     //表尺寸
     private final int SIZE = 9;
     //9个块的坐标
@@ -17,45 +18,18 @@ public class SudokuSolver {
             {{6, 0}, {6, 1}, {6, 2}, {7, 0}, {7, 1}, {7, 2}, {8, 0}, {8, 1}, {8, 2}},
             {{6, 3}, {6, 4}, {6, 5}, {7, 3}, {7, 4}, {7, 5}, {8, 3}, {8, 4}, {8, 5}},
             {{6, 6}, {6, 7}, {6, 8}, {7, 6}, {7, 7}, {7, 8}, {8, 6}, {8, 7}, {8, 8}}};
-    //表的内容
-    //[x][y]
-    //x(0-8):横轴
-    //y(0-8):纵轴
+    //表内容
     private int[][] sudu_base = new int[SIZE][SIZE];
     private int[][] sudu;
-    //每个格子的可能值
-    //[x][y][z]
-    //x(0-8):横轴
-    //y(0-8):纵轴
-    //z(0-9):0-可能值的个数
-    //z(0-9):(1-9)-是否有可能为该值
-    private int[][][] sudu_FLAG = new int[SIZE][SIZE][SIZE + 1];
 
-    //构造函数，初始化sudu和sudu_FLAG
-    SudokuSolver(int[][] sudu) {
+    public SudokuBacktrackSolver(int[][] sudu) {
+        //一个浅拷贝一个深拷贝
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 sudu_base[i][j] = sudu[i][j];
             }
         }
         this.sudu = sudu;
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                if (this.sudu[i][j] == 0) {//格子空
-                    sudu_FLAG[i][j][0] = 9; //9个值都有可能
-                    for (int k = 1; k <= SIZE; k++) {
-                        sudu_FLAG[i][j][k] = 1; //坐标i,j的值可能为k
-                    }
-                } else {//格子非空
-                    sudu_FLAG[i][j][0] = 1; //一个可能值
-                    sudu_FLAG[i][j][this.sudu[i][j]] = 1; //可能值为sudu[i][j]
-                    for (int k = 1; k <= SIZE; k++) {
-                        if (k != this.sudu[i][j])
-                            sudu_FLAG[i][j][k] = 0; //坐标i,j的值不可能为k
-                    }
-                }
-            }
-        }
     }
 
     //    根据坐标确定块编号
@@ -117,108 +91,97 @@ public class SudokuSolver {
         return -1;
     }
 
-    //按块排除可能值
-    private Boolean updateProbValBlock(int x, int y, int k) {
-        Boolean FLAG_Updated = false;
-        int blockId = findBlock(x, y);
-        for (int i = 0; i < 9; i++) { //一个块内有9个格子
-            int xx = BLOCK_COORDINATE[blockId][i][0];
-            int yy = BLOCK_COORDINATE[blockId][i][1]; //块内当前格子坐标
-            if (!(xx == x && yy == y)) { //跳过自己
-                if (sudu_FLAG[xx][yy][k] == 1) {
-                    sudu_FLAG[xx][yy][k] = 0; //排除可能值k
-                    sudu_FLAG[xx][yy][0] -= 1; //可能值个数减1
-                    FLAG_Updated = true;
+    public void dfs(int x, int y) {
+        if ((x + y != 0) && !check(x, y)) {
+            return;
+        }
+        int[] next = {x, y};
+        //从上到下、从左到右找下一个未赋值的格子
+        findNext(next);
+        if (next[0] == -1) { //没有找到，已完成
+            print();
+            return;
+        }
+        //将未赋值格子依次赋值为1-9
+        int nextX = next[0];
+        int nextY = next[1];
+        for (int k = 1; k <= 9; k++) {
+            sudu[nextX][nextY] = k;
+            dfs(nextX, nextY);
+            sudu[nextX][nextY] = 0;
+        }
+    }
+
+    //sudu[i][j]放置值后，是否满足规则
+    public boolean check(int i, int j) {
+        //横
+        int flag = 1; //用位运算判断横、竖、块中1-9的存在性
+        for (int k = 0; k < SIZE; k++) {
+            if (sudu[i][k] != 0) {
+                if ((flag & (1 << sudu[i][k])) > 0) { //判断对应位是不是1
+                    return false;
+                }
+                flag = flag ^ (1 << sudu[i][k]); //把对应位置1
+            }
+        }
+        //竖
+        flag = 1;
+        for (int k = 0; k < SIZE; k++) {
+            if (sudu[k][j] != 0) {
+                if ((flag & (1 << sudu[k][j])) > 0) {
+                    return false;
+                }
+                flag = flag ^ (1 << sudu[k][j]);
+            }
+        }
+        //块
+        flag = 1;
+        int blockId = findBlock(i, j);
+        for (int k = 0; k < 9; k++) {
+            int x = BLOCK_COORDINATE[blockId][k][0];
+            int y = BLOCK_COORDINATE[blockId][k][1];
+            if (sudu[x][y] != 0) {
+                if ((flag & (1 << sudu[x][y])) > 0) {
+                    return false;
+                }
+                flag = flag ^ (1 << sudu[x][y]);
+            }
+        }
+        return true;
+    }
+
+//    boolean isDone() {
+//        for (int i = 0; i < SIZE; i++) {
+//            for (int j = 0; j < SIZE; j++) {
+//                if (sudu[i][j] == 0)
+//                    return false;
+//            }
+//        }
+//        return true;
+//    }
+
+    //找下一个（包含自己）未处理的格子
+    public void findNext(int[] pos) {
+        if (sudu[pos[0]][pos[1]] == 0) return; //下一个就是自己
+        while (sudu[pos[0]][pos[1]] != 0) {
+            if (pos[1] < SIZE - 1) { //还在当前行
+                pos[1] += 1;
+            } else { //转到下一行
+                pos[0] += 1;
+                pos[1] = 0;
+                if (pos[0] >= SIZE) { //超出范围了，没有找到
+                    pos[0] = -1;
+                    break;
                 }
             }
         }
-        return FLAG_Updated;
     }
 
-    //按行、列排除可能值
-    private Boolean updateProbValColAndRow(int x, int y, int k) {
-        Boolean FLAG_Updated = false;
-        //column
-        int count = 1;
-        while (count < 9) {
-            int xx = (x + count) % 9; //0-8
-            if (sudu_FLAG[xx][y][k] == 1) {
-                sudu_FLAG[xx][y][k] = 0;//排除可能值k
-                sudu_FLAG[xx][y][0] -= 1;
-                FLAG_Updated = true;
-            }
-            count++;
-        }
-        //row
-        count = 1;
-        while (count < 9) {
-            int yy = (y + count) % 9;
-            if (sudu_FLAG[x][yy][k] == 1) {
-                sudu_FLAG[x][yy][k] = 0;
-                sudu_FLAG[x][yy][0] -= 1;
-                FLAG_Updated = true;
-            }
-            count++;
-        }
-        return FLAG_Updated;
+    public void solve() {
+        dfs(0, 0);
     }
 
-    //solver
-    void solve() {
-        //对表的一轮遍历是否有更新，无更新即处理完毕
-        Boolean FLAG_UPDATED = true;
-        //根据已确定值的格子来更新其他格子的可能值
-        while (FLAG_UPDATED) {
-            FLAG_UPDATED = false;
-            for (int i = 0; i < SIZE; i++) {
-                for (int j = 0; j < SIZE; j++) {
-                    if (sudu_FLAG[i][j][0] == 1) {//该格子的值已确定，可用来更新其他格子的可能值
-                        //找出该确定值k
-                        int k = 1;
-                        for (; sudu_FLAG[i][j][k] != 1 && k <= 9; k++) ;
-                        sudu[i][j] = k;
-                        //按行和列更新，返回是否有更新
-                        Boolean FLAG_RowColUpdated = updateProbValColAndRow(i, j, k);
-                        //按块更新，返回是否有更新
-                        Boolean FLAG_BlockUpdated = updateProbValBlock(i, j, k);
-                        if (FLAG_RowColUpdated || FLAG_BlockUpdated)//有更新
-                            FLAG_UPDATED = true;
-                    }
-                }
-            }
-        }
-        System.out.println("完毕");
-        //打印结果
-        print();
-    }
-
-    //打印
-    /*打印效果(中括号内为后填入的数字)
-     8  [0] [0] | [0]  5   9  | [0] [0] [0]
-    [0]  4   5  | [0]  8   7  |  9   6  [0]
-    [0]  9  [0] |  2  [0]  4  |  5   8   7
-    ---------------------------------------
-    [0] [0]  9  | [0] [0]  6  |  8   4   1
-     4   1  [0] | [0] [0] [0] |  6  [0] [0]
-     6   2   8  |  4  [0] [0] |  3   7   5
-    ---------------------------------------
-    [0]  7   1  |  9   6   2  |  4   3   8
-    [0]  8   4  |  7  [0]  3  |  2   5  [0]
-    [0] [0]  2  |  8  [0]  5  |  7  [0]  9
-    */
-    private void print() {
-        /*for(int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                System.out.print(sudu_base[i][j]);
-            }
-            System.out.println();
-        }
-        for(int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                System.out.print(sudu[i][j]);
-            }
-            System.out.println();
-        }*/
+    public void print() {
         //先格式化打印原始表
         System.out.println(" ----------------------------------------- ");
         for (int i = 0; i < SIZE; i++) {
@@ -267,4 +230,3 @@ public class SudokuSolver {
         System.out.println(" ----------------------------------------- ");
     }
 }
-

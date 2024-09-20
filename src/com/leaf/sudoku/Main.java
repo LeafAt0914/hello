@@ -6,19 +6,20 @@ import java.util.Scanner;
  * 一个简单的数独解决器
  */
 public class Main {
-    public static void main(String args[]){
+    public static void main(String args[]) {
         int SIZE = 9;
         int[][] sudu = new int[SIZE][SIZE];
-        while(true){
+        while (true) {
             System.out.println("请输入(9*9):");
-            Scanner input=new Scanner(System.in);
-            for(int i = 0; i < SIZE; i++) {
+            Scanner input = new Scanner(System.in);
+            for (int i = 0; i < SIZE; i++) {
                 for (int j = 0; j < SIZE; j++) {
                     sudu[i][j] = input.nextInt();
                 }
             }
-            SudokuSolver SS = new SudokuSolver(sudu);
-            SS.solve();
+            //SudokuSolver ss = new SudokuSolver(sudu);
+            SudokuBacktrackSolver ss = new SudokuBacktrackSolver(sudu);
+            ss.solve();
         }
     }
 }
