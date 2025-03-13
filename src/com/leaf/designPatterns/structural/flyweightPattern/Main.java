@@ -1,7 +1,5 @@
 package com.leaf.designPatterns.structural.flyweightPattern;
 
-import com.leaf.designPatterns.structural.flyweightPattern.impl.JdbcConnection;
-
 /**
  * @author leshu
  * @since 2025/3/13 15:42
