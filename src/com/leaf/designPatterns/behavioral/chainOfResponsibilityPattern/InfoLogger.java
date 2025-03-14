@@ -1,21 +1,21 @@
-package com.leaf.designPatterns.structural.chainOfResponsibilityPattern;
+package com.leaf.designPatterns.behavioral.chainOfResponsibilityPattern;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  * @author leshu
- * @since 2025/3/14 10:58
+ * @since 2025/3/14 10:51
  **/
-public class ErrorLogger extends AbstractLogger{
+public class InfoLogger extends AbstractLogger{
 
-    public ErrorLogger(int level) {
+    public InfoLogger(int level) {
         this.level = level;
     }
 
     @Override
     protected void doLog(String message) {
         String d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-        System.out.println(d + " ERROR : " + message);
+        System.out.println(d + " INFO : " + message);
     }
 }

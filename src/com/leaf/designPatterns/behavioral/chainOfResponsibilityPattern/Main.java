@@ -1,4 +1,4 @@
-package com.leaf.designPatterns.structural.chainOfResponsibilityPattern;
+package com.leaf.designPatterns.behavioral.chainOfResponsibilityPattern;
 
 /**
  * @author leshu
