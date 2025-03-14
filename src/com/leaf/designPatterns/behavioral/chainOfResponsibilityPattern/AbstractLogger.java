@@ -1,9 +1,5 @@
 package com.leaf.designPatterns.behavioral.chainOfResponsibilityPattern;
 
-/**
- * @author leshu
- * @since 2025/3/14 10:43
- **/
 public abstract class AbstractLogger {
 
     public static int INFO = 1;

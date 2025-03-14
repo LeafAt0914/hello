@@ -1,9 +1,5 @@
 package com.leaf.designPatterns.behavioral.chainOfResponsibilityPattern;
 
-/**
- * @author leshu
- * @since 2025/3/14 10:06
- **/
 public class Main {
 
     private static AbstractLogger initLog() {

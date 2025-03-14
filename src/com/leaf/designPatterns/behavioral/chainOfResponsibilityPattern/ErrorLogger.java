@@ -3,10 +3,6 @@ package com.leaf.designPatterns.behavioral.chainOfResponsibilityPattern;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * @author leshu
- * @since 2025/3/14 10:58
- **/
 public class ErrorLogger extends AbstractLogger{
 
     public ErrorLogger(int level) {
