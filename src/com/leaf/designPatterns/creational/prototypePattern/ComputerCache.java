@@ -1,8 +1,5 @@
 package com.leaf.designPatterns.creational.prototypePattern;
 
-import com.leaf.designPatterns.creational.prototypePattern.ext.MacBook;
-import com.leaf.designPatterns.creational.prototypePattern.ext.MateBook;
-
 import java.util.Hashtable;
 
 /**

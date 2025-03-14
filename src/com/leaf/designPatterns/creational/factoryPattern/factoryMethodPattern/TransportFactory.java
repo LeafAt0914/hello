@@ -1,9 +1,5 @@
 package com.leaf.designPatterns.creational.factoryPattern.factoryMethodPattern;
 
-import com.leaf.designPatterns.creational.factoryPattern.factoryMethodPattern.impl.Car;
-import com.leaf.designPatterns.creational.factoryPattern.factoryMethodPattern.impl.Airplane;
-import com.leaf.designPatterns.creational.factoryPattern.factoryMethodPattern.impl.Train;
-
 /**
  * @author leshu
  * @since 2025/3/10 13:38

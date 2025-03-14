@@ -1,7 +1,5 @@
 package com.leaf.designPatterns.structural.flyweightPattern;
 
-import com.leaf.designPatterns.structural.flyweightPattern.impl.JdbcConnection;
-
 import java.util.ArrayList;
 import java.util.List;
 

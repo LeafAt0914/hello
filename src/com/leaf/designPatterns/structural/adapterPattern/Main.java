@@ -1,8 +1,5 @@
 package com.leaf.designPatterns.structural.adapterPattern;
 
-import com.leaf.designPatterns.structural.adapterPattern.impl.DocumentReaderImpl;
-import com.leaf.designPatterns.structural.adapterPattern.impl.TxtReaderImpl;
-
 /**
  * @author leshu
  * @since 2025/3/11 16:32

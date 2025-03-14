@@ -1,7 +1,5 @@
 package com.leaf.designPatterns.structural.proxyPattern;
 
-import com.leaf.designPatterns.structural.proxyPattern.impl.ImageServerProxy;
-
 /**
  * @author leshu
  * @since 2025/3/13 16:51

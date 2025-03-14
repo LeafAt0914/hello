@@ -1,9 +1,5 @@
 package com.leaf.designPatterns.structural.facadePattern;
 
-import com.leaf.designPatterns.structural.facadePattern.impl.Rectangle;
-import com.leaf.designPatterns.structural.facadePattern.impl.Square;
-import com.leaf.designPatterns.structural.facadePattern.impl.Triangle;
-
 /**
  * @author leshu
  * @since 2025/3/13 14:53

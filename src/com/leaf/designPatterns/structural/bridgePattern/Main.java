@@ -1,10 +1,5 @@
 package com.leaf.designPatterns.structural.bridgePattern;
 
-import com.leaf.designPatterns.structural.bridgePattern.ext.Circle;
-import com.leaf.designPatterns.structural.bridgePattern.ext.Rectangle;
-import com.leaf.designPatterns.structural.bridgePattern.impl.Red;
-import com.leaf.designPatterns.structural.bridgePattern.impl.White;
-
 /**
  * @author leshu
  * @since 2025/3/12 16:19

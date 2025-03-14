@@ -1,9 +1,5 @@
 package com.leaf.designPatterns.structural.decoratorPattern;
 
-import com.leaf.designPatterns.structural.decoratorPattern.ext.RedShapeDecorator;
-import com.leaf.designPatterns.structural.decoratorPattern.impl.Circle;
-import com.leaf.designPatterns.structural.decoratorPattern.impl.Rectangle;
-
 /**
  * @author leshu
  * @since 2025/3/13 14:38

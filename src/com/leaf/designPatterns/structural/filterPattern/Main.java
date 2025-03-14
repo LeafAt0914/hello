@@ -1,8 +1,5 @@
 package com.leaf.designPatterns.structural.filterPattern;
 
-import com.leaf.designPatterns.structural.filterPattern.impl.CriteriaAgeLarger18;
-import com.leaf.designPatterns.structural.filterPattern.impl.CriteriaMale;
-
 import java.util.ArrayList;
 import java.util.List;
 
