@@ -1,9 +1,5 @@
 package com.leaf.designPatterns.creational.builderPattern;
 
-/**
- * @author leshu
- * @since 2025/3/10 18:02
- **/
 public class Director {
 
     private GoHomeByTrainBuilder goHomeByTrainBuilder;

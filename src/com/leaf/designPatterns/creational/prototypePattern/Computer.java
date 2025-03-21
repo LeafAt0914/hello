@@ -1,9 +1,5 @@
 package com.leaf.designPatterns.creational.prototypePattern;
 
-/**
- * @author leshu
- * @since 2025/3/11 14:10
- **/
 public abstract class Computer implements Cloneable {
 
     private String id;

@@ -12,9 +12,6 @@ package com.leaf.designPatterns.creational.singletonPattern.lazyThreadSafe;
  * 优点：第一次调用才初始化，避免内存浪费。
  * 缺点：必须加锁 synchronized 才能保证单例，但加锁会影响效率。
  * getInstance() 的性能对应用程序不是很关键（该方法使用不太频繁）。
- *
- * @author leshu
- * @since 2025/3/10 15:56
  **/
 public class Singleton {
 

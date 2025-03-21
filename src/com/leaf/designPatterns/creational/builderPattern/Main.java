@@ -1,9 +1,5 @@
 package com.leaf.designPatterns.creational.builderPattern;
 
-/**
- * @author leshu
- * @since 2025/3/10 17:55
- **/
 public class Main {
     public static void main(String[] args) {
         Director director = new Director();

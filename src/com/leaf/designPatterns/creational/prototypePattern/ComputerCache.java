@@ -2,10 +2,6 @@ package com.leaf.designPatterns.creational.prototypePattern;
 
 import java.util.Hashtable;
 
-/**
- * @author leshu
- * @since 2025/3/11 14:24
- **/
 public class ComputerCache {
 
     private static Hashtable<String, Computer> computerMap = new Hashtable<>();

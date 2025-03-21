@@ -1,10 +1,6 @@
 package com.leaf.designPatterns.creational.factoryPattern.simpleFactoryPattern;
 
 
-/**
- * @author leshu
- * @since 2025/3/10 11:50
- **/
 public class Main {
     public static void main(String[] args) {
         String transportType = "TRAIN";

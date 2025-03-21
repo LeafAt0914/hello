@@ -1,9 +1,5 @@
 package com.leaf.designPatterns.creational.prototypePattern;
 
-/**
- * @author leshu
- * @since 2025/3/11 14:21
- **/
 public class MateBook extends Computer {
 
     public MateBook() {

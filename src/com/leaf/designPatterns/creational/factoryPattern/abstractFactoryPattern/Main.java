@@ -1,9 +1,5 @@
 package com.leaf.designPatterns.creational.factoryPattern.abstractFactoryPattern;
 
-/**
- * @author leshu
- * @since 2025/3/10 11:50
- **/
 public class Main {
     public static void main(String[] args) {
         AbstractFactory transportFactory = FactoryProducer.getFactory("TRANSPORT");

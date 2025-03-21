@@ -1,9 +1,5 @@
 package com.leaf.designPatterns.creational.factoryPattern.abstractFactoryPattern;
 
-/**
- * @author leshu
- * @since 2025/3/10 14:16
- **/
 public class FactoryProducer {
     public static AbstractFactory getFactory(String choice) {
         if (null == choice) {
