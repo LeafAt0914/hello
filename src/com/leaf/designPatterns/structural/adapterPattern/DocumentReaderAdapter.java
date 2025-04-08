@@ -1,27 +1,25 @@
 package com.leaf.designPatterns.structural.adapterPattern;
 
-/**
- * @author leshu
- * @since 2025/3/11 16:20
- **/
-public class DocumentReaderAdapter implements DocumentReader {
 
-    AdvancedDocumentReader advancedDocumentReader;
+public class DocumentReaderAdapter implements DocumentReaderTarget {
 
-    public DocumentReaderAdapter(String docType) {
-        if (".doc".equals(docType)) {
-            advancedDocumentReader = new DocReader();
-        } else if (".xls".equals(docType)) {
-            advancedDocumentReader = new XlsReader();
-        }
-    }
+    TxtReaderImpl txtReader;
+
+    DocumentReaderAdaptee documentReaderAdaptee;
 
     @Override
     public void read(String docType, String fileName) {
-        if (".doc".equals(docType)) {
-            advancedDocumentReader.readDoc(fileName);
+        if (".txt".equals(docType)) {
+            txtReader = new TxtReaderImpl();
+            txtReader.read(fileName);
+        } else if (".doc".equals(docType)) {
+            documentReaderAdaptee = new DocReaderAdapteeImpl();
+            documentReaderAdaptee.readDoc(fileName);
         } else if (".xls".equals(docType)) {
-            advancedDocumentReader.readXls(fileName);
+            documentReaderAdaptee = new XlsReaderAdapteeImpl();
+            documentReaderAdaptee.readXls(fileName);
+        } else {
+            System.out.println(docType + " is not supported");
         }
     }
 }

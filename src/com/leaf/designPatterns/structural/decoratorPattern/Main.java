@@ -1,9 +1,6 @@
 package com.leaf.designPatterns.structural.decoratorPattern;
 
-/**
- * @author leshu
- * @since 2025/3/13 14:38
- **/
+
 public class Main {
 
     public static void main(String[] args) {

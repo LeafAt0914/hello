@@ -3,10 +3,7 @@ package com.leaf.designPatterns.structural.filterPattern;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author leshu
- * @since 2025/3/12 17:21
- **/
+
 public class Main {
 
     public static void print(List<Person> personList) {

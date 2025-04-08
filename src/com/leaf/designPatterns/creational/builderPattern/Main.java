@@ -1,16 +1,25 @@
 package com.leaf.designPatterns.creational.builderPattern;
 
 public class Main {
-    public static void main(String[] args) {
-        Director director = new Director();
 
-        GoHomeByTrain goHomeByTrain1 = director.construct("oneDayLater", 1111f, false);
+    public static GoHomeByTrain construct(GoHomeByTrainBuilder goHomeByTrainBuilder, String goDate, Float price, Boolean needIdCard) {
+        goHomeByTrainBuilder.buildGoDate(goDate);
+        goHomeByTrainBuilder.buildPrice(price);
+        goHomeByTrainBuilder.buildNeedIdCard(needIdCard);
+        return goHomeByTrainBuilder.build();
+    }
+
+    public static void main(String[] args) {
+        GoHomeByTrainBuilder goHomeByTrainBuilder1 = new GoHomeByTrainBuilder();
+        GoHomeByTrain goHomeByTrain1 = construct(goHomeByTrainBuilder1, "oneDayLater", 1111f, false);
         System.out.println(goHomeByTrain1);
 
-        GoHomeByTrain goHomeByTrain2 = director.construct(null, 999f, false);
+        GoHomeByTrainBuilder goHomeByTrainBuilder2 = new GoHomeByTrainBuilder();
+        GoHomeByTrain goHomeByTrain2 = construct(goHomeByTrainBuilder2, null, 999f, false);
         System.out.println(goHomeByTrain2);
 
-        GoHomeByTrain goHomeByTrain3 = director.construct("oneDayLater", 999f, true);
+        GoHomeByTrainBuilder goHomeByTrainBuilder3 = new GoHomeByTrainBuilder();
+        GoHomeByTrain goHomeByTrain3 = construct(goHomeByTrainBuilder3, "oneDayLater", 999f, true);
         System.out.println(goHomeByTrain3);
     }
 }

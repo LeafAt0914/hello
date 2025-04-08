@@ -2,7 +2,11 @@ package com.leaf.designPatterns.creational.builderPattern;
 
 public class GoHomeByTrainBuilder extends Builder {
 
-    private GoHomeByTrain goHome = new GoHomeByTrain();
+    GoHomeByTrain goHome;
+
+    public GoHomeByTrainBuilder() {
+        goHome = new GoHomeByTrain();
+    }
 
     @Override
     public void buildGoDate(String goDate) {

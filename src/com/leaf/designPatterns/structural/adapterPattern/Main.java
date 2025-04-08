@@ -1,9 +1,6 @@
 package com.leaf.designPatterns.structural.adapterPattern;
 
-/**
- * @author leshu
- * @since 2025/3/11 16:32
- **/
+
 public class Main {
     public static void main(String[] args) {
 
@@ -12,7 +9,7 @@ public class Main {
         txtReader.read("abandon.txt");
 
         //适配后调用
-        DocumentReaderImpl documentReader = new DocumentReaderImpl();
+        DocumentReaderAdapter documentReader = new DocumentReaderAdapter();
         documentReader.read(".txt", "abandon.txt");
         documentReader.read(".doc", "abandon.doc");
         documentReader.read(".xls", "abandon.xls");

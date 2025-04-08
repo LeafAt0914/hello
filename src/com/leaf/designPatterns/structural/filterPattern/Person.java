@@ -1,9 +1,6 @@
 package com.leaf.designPatterns.structural.filterPattern;
 
-/**
- * @author leshu
- * @since 2025/3/12 17:10
- **/
+
 public class Person {
 
     private String name;
